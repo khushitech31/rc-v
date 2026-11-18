@@ -1,59 +1,73 @@
+
 # P05 Left barrel shifter - dossier
 
-Answer in your own words; short answers are fine. Diagrams can be photos of
-hand drawings (put them next to this file and link them).
-
 ## U1 Digital logic
-Give the truth table (or state table) of one part of your circuit and the
-simplified Boolean expression you used. Which gates or flip-flops did you need?
+A 2:1 multiplexer selects one of two inputs.
+For each stage:
+- Select = 0: output is the original input.
+- Select = 1: output is shifted left by the required number of positions.
+
+The Boolean expression for a mux is:
+Y = (~S AND A) OR (S AND B).
+
+The circuit uses multiplexers and zero-filling for logical left shifts.
 
 ## U2 Digital components
-Which building blocks (adders, multiplexers, decoders, registers, memory)
-does your Digital circuit use, and how are they connected?
+The circuit uses 2:1 multiplexers connected in three cascaded stages.
+The stages shift the 8-bit input by 1, 2 and 4 positions.
+The shift control bits sh[0], sh[1] and sh[2] select the stages.
+Zeros enter from the right side.
 
 ## U3 Data representation
-Pick three test vectors of your block and explain them in binary, hex and
-decimal (signed where it matters). Where could overflow or sign extension go wrong?
+Three example test vectors:
+
+1. a = 23, sh = 1, y = 46
+   Binary: 00010111 -> 00101110
+   Hex: 0x17 -> 0x2E
+
+2. a = 9, sh = 2, y = 36
+   Binary: 00001001 -> 00100100
+   Hex: 0x09 -> 0x24
+
+3. a = 128, sh = 1, y = 0
+   Binary: 10000000 -> 00000000
+   Hex: 0x80 -> 0x00
+
+In an 8-bit circuit, bits shifted beyond the leftmost position are lost.
+This can cause overflow of the original value.
 
 ## U4 Computer organisation
-In which step of the instruction cycle (fetch, decode, execute, memory,
-write-back, interrupt) does your block do its work? Which instructions need it?
+The barrel shifter performs its operation during the execute stage.
+It receives the input value and shift amount and produces the shifted result.
+It is a combinational circuit and does not need clock cycles or registers internally.
 
 ## U5 Processors
-How would a CISC processor, a stack machine or a GPU do the job of your
-block differently? (Look at the RISC-V vs Mano comparison in docs/ARCHITECTURE.md.)
+A CISC processor may use a different instruction implementation.
+A stack machine may use stack operands instead of explicit registers.
+A GPU may use parallel hardware for many operations.
+The barrel shifter provides a fast hardware way to perform shifts.
 
 ## U6 Memory and I/O
-How does your block take part in a memory access or an I/O transfer? If it
-does not, explain which neighbouring block does and how data reaches it.
+The barrel shifter does not directly perform memory access or I/O transfers.
+It receives data from neighbouring datapath components and sends its shifted result to the next component.
 
 ## E1 Instruction trace: BEQ (taken)
-Trace one **BEQ (taken)** instruction through the whole RC-V processor,
-block by block (use docs/ARCHITECTURE.md and the simulator's --trace output).
-List the blocks it passes through and the value on the main signals.
+To be completed using the RC-V simulator trace output and docs/ARCHITECTURE.md.
+Add the actual blocks, main signal values and branch target from the trace.
 
 ## E2 Neighbour review
-Review the pull requests of P04 (ALU logic unit) and P06 (Right barrel shifter). Paste the links to your review
-comments here.
+Add the actual review links for P04 (ALU logic unit) and P06 (Right barrel shifter).
+Do not invent review links.
 
 ## E3 Where my block sits
-In two or three sentences: which layer of the computer is your block in
-(gates / components / datapath / control / instruction set / memory / I/O),
-which blocks feed it and which blocks use its output?
+My block belongs to the datapath and combinational logic layer.
+It receives input data and a shift amount and produces the shifted output.
+The processor datapath uses its output when a shift operation is required.
 
 ## E4 Syllabus map
-Tick every syllabus topic your work touched (main units: Unit 2).
-
-- [ ] Logic gates, Boolean algebra, K-maps
-- [ ] Combinational circuits (adders, decoders, encoders, multiplexers)
-- [ ] Flip-flops, registers, counters
-- [ ] Memory (RAM, ROM)
-- [ ] Number systems, complements, signed arithmetic
-- [ ] Bus organisation, instruction codes and formats
-- [ ] Instruction cycle, hardwired vs microprogrammed control
-- [ ] Interrupts and the interrupt cycle
-- [ ] Pipelining
-- [ ] Register organisation, stack, addressing modes
-- [ ] RISC vs CISC, multicore, GPU
-- [ ] Memory hierarchy, cache
-- [ ] I/O interface, programmed / interrupt-driven I/O, DMA
+Topics covered:
+- Logic gates and Boolean algebra
+- Combinational circuits
+- Multiplexers
+- Number systems and binary representation
+- 
