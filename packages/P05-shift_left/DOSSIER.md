@@ -56,8 +56,11 @@ To be completed using the RC-V simulator trace output and docs/ARCHITECTURE.md.
 Add the actual blocks, main signal values and branch target from the trace.
 
 ## E2 Neighbour review
-Add the actual review links for P04 (ALU logic unit) and P06 (Right barrel shifter).
-Do not invent review links.
+
+
+P04 ALU logic unit review: [https://github.com/campus-sutra/rc-v/pull/132#pullrequestreview-5956794413]
+
+P06 Right barrel shifter review: [https://github.com/campus-sutra/rc-v/pull/136#pullrequestreview-5956805932]
 
 ## E3 Where my block sits
 My block belongs to the datapath and combinational logic layer.
