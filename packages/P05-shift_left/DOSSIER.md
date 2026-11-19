@@ -73,4 +73,4 @@ Topics covered:
 - Combinational circuits
 - Multiplexers
 - Number systems and binary representation
-- 
+  
