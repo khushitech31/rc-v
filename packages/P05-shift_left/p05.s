@@ -72,4 +72,4 @@ p05_msg8:
 p05_msg10:
     .asciz "N*10 = "
 
-.align 2 
+.align 2
